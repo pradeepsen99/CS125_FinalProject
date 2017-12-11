@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +19,7 @@ public class UserInterface extends JFrame implements ActionListener {
 	private String[][] info;
 	private String[] stopList= {"a","b","c","d"};
 	private HashMap map;
-	private JTextArea schedule;
+	private JTextArea schedule= new JTextArea();
 	
 	/**
 	 * 
@@ -49,13 +50,14 @@ public class UserInterface extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
+		contentPane.setLayout(new BorderLayout(0,0));
 		
 		JComboBox<String> cb = new JComboBox<String>(stopList);
 		cb.addActionListener(this);
-		contentPane.add(cb);
-		contentPane.add(schedule);
+		schedule.setEditable(false);
+		contentPane.add(cb, BorderLayout.NORTH);
+		contentPane.add(schedule , BorderLayout.CENTER);
 		
 		setContentPane(contentPane);
 		
