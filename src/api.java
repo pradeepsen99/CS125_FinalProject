@@ -94,37 +94,50 @@ public class api {
     public String[] getStops() throws JSONException {
         String stops1 = urlToJSON("https://developer.cumtd.com/api/v2.2/JSON/getstops?key=a2142759b9ac473e8dbdb95572546a7b");
 
+        //Converting JSON String to an Array of JSON Objects for making parsing easier.
         String jsonString = stops1;
         JSONObject jsnobject = new JSONObject(stops1);
         JSONArray jsonArray = jsnobject.getJSONArray("stops");
 
         ArrayList<String> stops = new ArrayList<String>();
 
+        //Parses through the array of JSONObjects and pulls all the data under stop_id and stores in arrayList.
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject explrObject = jsonArray.getJSONObject(i);
             stops.add(explrObject.getString("stop_id"));
         }
 
-
+        //Convert arrayList to regular String array.
         String[] ret = stops.toArray(new String[0]);
 
         return ret;
     }
 
-    public String[] getRoutes(String stopID) throws JSONException {
-        String routesStr = urlToJSON("https://developer.cumtd.com/api/v2.2/JSON/getdeparturesbystop?key=a2142759b9ac473e8dbdb95572546a7b&stop_id=" + stopID);
 
+    /**
+     * This method takes in a StopID and uses the MTD api to get a list of all the routes for the given stop.
+     *
+     * @param stopID The stopID to get info on the stop
+     * @return an array of all the routes associated with the specific stop.
+     * @throws JSONException
+     */
+    public String[] getRoutes(String stopID) throws JSONException {
+        //Converting JSON String to an Array of JSON Objects for making parsing easier.
+
+        String routesStr = urlToJSON("https://developer.cumtd.com/api/v2.2/JSON/getdeparturesbystop?key=a2142759b9ac473e8dbdb95572546a7b&stop_id=" + stopID);
         JSONObject jsnobject = new JSONObject(routesStr);
         JSONArray jsonArray = jsnobject.getJSONArray("departures");
 
         ArrayList<String> routes = new ArrayList<String>();
 
+        //Parses through the array of JSONObjects and pulls all the data under headsign (which is the name that
+        // is displayed in the bus and stores in arrayList.
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject explrObject = jsonArray.getJSONObject(i);
-            routes.add(explrObject.getString("stop_id"));
+            routes.add(explrObject.getString("headsign"));
         }
 
-
+        //Convert arrayList to regular String array.
         String[] ret = routes.toArray(new String[0]);
 
         return ret;
