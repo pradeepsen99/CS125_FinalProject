@@ -15,10 +15,9 @@ import java.util.HashMap;
 
 public class UserInterface extends JFrame implements ActionListener {
 
-	private JButton refreshButton = new JButton("refresh");
-	private String[][] info;
-	private String[] stopList= {"a","b","c","d"};
-	private HashMap map;
+	
+	private String[] stopList= api.getStops();
+	
 	private JTextArea schedule= new JTextArea();
 	
 	/**
@@ -77,7 +76,8 @@ public class UserInterface extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() instanceof JComboBox) {
-			schedule.setText(arrayToString((String[])map.get(((JComboBox<?>) (e.getSource())).getSelectedItem())));
+			schedule.setText(arrayToString(api.getRoutes((String)((JComboBox<?>) (e.getSource())).getSelectedItem())));
+			
 		} 
 	
 	}
