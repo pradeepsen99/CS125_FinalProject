@@ -23,9 +23,9 @@ public class UserInterface extends JFrame implements ActionListener {
 	private String[] stopList= stops.getStops();
 	private HashMap map;
 	private JTextArea schedule= new JTextArea();
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -3509133366062402069L;
 	private JPanel contentPane;
@@ -55,19 +55,19 @@ public class UserInterface extends JFrame implements ActionListener {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		contentPane.setLayout(new BorderLayout(0,0));
-		
+
 		JComboBox<String> cb = new JComboBox<String>(stopList);
 		cb.addActionListener(this);
 		schedule.setEditable(false);
 		contentPane.add(cb, BorderLayout.NORTH);
 		contentPane.add(schedule , BorderLayout.CENTER);
-		
+
 		setContentPane(contentPane);
-		
-		
+
+
 	}
 	private void update() {
-		
+
 	}
 	private String arrayToString(String[] a) {
 		String str=a[0];
