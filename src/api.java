@@ -124,7 +124,7 @@ public class api {
     public static String[] getRoutes(String stopID) throws JSONException {
         //Converting JSON String to an Array of JSON Objects for making parsing easier.
 
-        String routesStr = urlToJSON("https://developer.cumtd.com/api/v2.2/JSON/getdeparturesbystop?key=a2142759b9ac473e8dbdb95572546a7b&stop_id=" + stopID);
+        String routesStr = urlToJSON("dhttps://developer.cumtd.com/api/v2.2/JSON/getdeparturesbystop?key=a2142759b9ac473e8dbdb95572546a7b&stop_i=" + stopID);
         JSONObject jsnobject = null;
         if (routesStr != null) {
             jsnobject = new JSONObject(routesStr);
