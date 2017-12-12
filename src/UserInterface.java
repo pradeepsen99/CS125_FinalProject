@@ -1,3 +1,5 @@
+import org.json.JSONException;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -17,7 +19,8 @@ public class UserInterface extends JFrame implements ActionListener {
 
 	private JButton refreshButton = new JButton("refresh");
 	private String[][] info;
-	private String[] stopList= {"a","b","c","d"};
+	private api stops = new api();
+	private String[] stopList= stops.getStops();
 	private HashMap map;
 	private JTextArea schedule= new JTextArea();
 	
@@ -46,7 +49,7 @@ public class UserInterface extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public UserInterface() {
+	public UserInterface() throws JSONException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -77,7 +80,11 @@ public class UserInterface extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() instanceof JComboBox) {
-			schedule.setText(arrayToString((String[])map.get(((JComboBox<?>) (e.getSource())).getSelectedItem())));
+			try {
+				schedule.setText(arrayToString(api.getRoutes((String) ((JComboBox<?>) (e.getSource())).getSelectedItem())));
+			} catch (JSONException e1) {
+				e1.printStackTrace();
+			}
 		} 
 	
 	}

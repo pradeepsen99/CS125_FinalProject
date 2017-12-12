@@ -25,7 +25,7 @@ public class api {
     /**
      * Stores the JSON string format.
      */
-    public String JSON = "";
+    public static String JSON = "";
 
     /**
      * Splits the main string into an array seperated by new line.
@@ -52,7 +52,7 @@ public class api {
      *
      * @return String JSON file retrieved from API Call.
      */
-    public String urlToJSON(String hi) {
+    public static String urlToJSON(String hi) {
         try {
             String mainURL = hi;
             URL url = new URL(mainURL);
@@ -121,11 +121,14 @@ public class api {
      * @return an array of all the routes associated with the specific stop.
      * @throws JSONException
      */
-    public String[] getRoutes(String stopID) throws JSONException {
+    public static String[] getRoutes(String stopID) throws JSONException {
         //Converting JSON String to an Array of JSON Objects for making parsing easier.
 
         String routesStr = urlToJSON("https://developer.cumtd.com/api/v2.2/JSON/getdeparturesbystop?key=a2142759b9ac473e8dbdb95572546a7b&stop_id=" + stopID);
-        JSONObject jsnobject = new JSONObject(routesStr);
+        JSONObject jsnobject = null;
+        if (routesStr != null) {
+            jsnobject = new JSONObject(routesStr);
+        }
         JSONArray jsonArray = jsnobject.getJSONArray("departures");
 
         ArrayList<String> routes = new ArrayList<String>();
